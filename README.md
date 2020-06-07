@@ -10,5 +10,5 @@ SA-recorder is an always-on recording solution. It actively listens to audio cha
 - SA-recorder should produce logs locally
 - SA-recorder should send a status report via mail on a selected interval (daily)
 
-# Setup headerless, passwordless ssh
+# Setup Pi with ssh login (headless)
 See SETUP.md for step-by-step setup of a raspberry Pi for use with SA-recorder.
