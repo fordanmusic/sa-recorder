@@ -17,25 +17,33 @@
     - Change SSH-HOST to your chosen name
     - Enter default password ('raspberry')
 1. Log in to Pi via `ssh SSH-HOST`
-1. Disable password login via `sudo nano /etc/ssh/sshd_config`
-    - Change to 'no' the following (uncomment lines if necessary):
-       - ChallengeResponseAuthentication no
-       - PasswordAuthentication no
-       - UsePAM no
+
 
 # Extra security steps
 
 It's always a good idea to take steps to better secure your Pi against potential attacks or misuse.
 
-1. Change Pi's default password via `sudo raspi-config`
-   - You can also change:
-     - Network name of Pi
-     - Locale & Timezone
-     - Update Pi
-1. 
-1. You can add a user via `sudo adduser alice`
-    - If you do, also change user in ~/.ssh/config
-    
+1. Set a password for root (sudo/su) via `sudo passwd root`
+1. Change the default username 'Pi':
+      - enable ssh root login via `sudo nano /etc/ssh/sshd_config`
+         - set "PermitRootLogin yes"
+      - restart ssh via `/etc/init.d/ssh restart`
+      - `logout` of your Pi (be sure all sessions into Pi are logged out)
+      - login to Pi as root (`ssh root@IPADDRESS`)
+      - Type password for root
+      - Change Pi username via `usermod -l NEWNAME pi`
+      - Change Pi homedir via `usermod -m -d /home/NEWNAME NEWNAME`
+      - `logout` again
+      - Change `user pi` to `user NEWNAME` in your local ~/.ssh/config
+      - Log in to your Pi via ssh
+      - disable ssh root login via `sudo nano /etc/ssh/sshd_config`
+         - set "PermitRootLogin no"
+1. Disable ssh password login via `sudo nano /etc/ssh/sshd_config`
+    - Change to 'no' the following (uncomment lines if necessary):
+       - ChallengeResponseAuthentication no
+       - PasswordAuthentication no
+       - UsePAM no
+1. Get the latest updates for your OS via `sudo apt-get update`
     
 # wpa_supplicant.conf
 
@@ -53,8 +61,8 @@ network={
 # ssh config
 
 ```
-host muzmachine
-        hostname 192.168.1.10
+host NAME
+        hostname IPADDRESS
         user pi
 ```
 
@@ -67,3 +75,5 @@ https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md
 https://www.raspberrypi.org/documentation/configuration/security.md
 
 https://www.ssh.com/ssh/keygen/
+
+https://thepihut.com/blogs/raspberry-pi-tutorials/how-to-change-the-default-account-username-and-password
