@@ -1,4 +1,4 @@
-# Setup passwordless ssh
+# Setup ssh login on headless Pi
 
 1. Get Raspberry Pi Imager (https://www.raspberrypi.org/downloads/)
 1. Image SD card (pref 32GB) with Raspberry Pi OS Lite
